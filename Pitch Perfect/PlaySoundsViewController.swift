@@ -82,7 +82,34 @@ class PlaySoundsViewController: UIViewController {
             print("ERR: input value for pitch [\(thePitch)] is out of bounds (-2400..+2400)")
         }
     }
-    
+   
+    func playWithEffect() {
+ 
+        // Stop and reset everything
+        myAudioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
+        
+        // Create player nodes
+        let audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        // create reverb effect node
+        // I searched the documentation and exemples on the internet
+        let effect = AVAudioUnitReverb()
+        effect.loadFactoryPreset(.Cathedral)
+        effect.wetDryMix = 50.0
+        audioEngine.attachNode(effect)
+        let inputFormat = effect.inputFormatForBus(0)
+        audioEngine.connect(audioPlayerNode, to: effect, format: inputFormat)
+        audioEngine.connect(effect, to: audioEngine.outputNode, format: inputFormat)
+        
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        try! audioEngine.start()
+        
+        audioPlayerNode.play()
+    }
+
 
     @IBAction func playSlow(sender: UIButton) {
         if noError {
@@ -106,11 +133,22 @@ class PlaySoundsViewController: UIViewController {
     @IBAction func playDarkVader(sender: UIButton) {
         if noError {
             if doDebug { print("playing darkvader...") }
-            playAudioPitch(-900)
+            playAudioPitch(-600)
         } else {
             print("ERR: trying to play a file sound while failed to load.")
         }
     }
+    
+    
+    @IBAction func playReverb(sender: UIButton) {
+        if noError {
+            if doDebug { print("playing reverb...") }
+            playWithEffect()
+        } else {
+            print("ERR: trying to play a file sound while failed to load.")
+        }
+    }
+    
     
     @IBAction func playFast(sender: UIButton) {
         if noError {

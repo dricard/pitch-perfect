@@ -27,26 +27,17 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     var recordedAudio: RecordedAudio!
     
     enum RecordingMode {
+        case Waiting
         case Recording
         case Paused
         init() {
-            self = .Recording
+            self = .Waiting
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(animated: Bool) {
         if doDebug { print("in viewWillAppear") }
-        waitingTapToRecord()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        recordingInterface(.Waiting)
     }
 
     @IBAction func recordAudio(sender: UIButton) {
@@ -76,32 +67,31 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.record()
    }
 
-    func waitingTapToRecord() {
+    func showAndHideRecordingInterface(hide: Bool) {
         if doDebug { print("in waitingTapToRecord") }
-        recordButton.enabled = true
-        recordingLabel.text = "Tap to record"
-        stopButton.hidden = true
-        resumeButton.hidden = true
-        pauseButton.hidden = true
-        resumeLabel.hidden = true
-        pauseLabel.hidden = true
-        stopLabel.hidden = true
-    }
+        // hide = true to hide the recording interface (and enable the 'tap to record' button)
+        // hide = false to show the recording interface (and disable the 'tap to record' button)
+        stopButton.hidden = hide
+        resumeButton.hidden = hide
+        pauseButton.hidden = hide
+        resumeLabel.hidden = hide
+        pauseLabel.hidden = hide
+        stopLabel.hidden = hide
+        recordButton.enabled = hide
+   }
     
     func recordingInterface(mode: RecordingMode) {
-        stopButton.hidden = false
-        resumeButton.hidden = false
-        pauseButton.hidden = false
-        resumeLabel.hidden = false
-        pauseLabel.hidden = false
-        stopLabel.hidden = false
-        recordButton.enabled = false
         switch mode {
+        case .Waiting:
+            showAndHideRecordingInterface(true)
+            recordingLabel.text = "Tap to record"
         case .Recording:
+            showAndHideRecordingInterface(false)
             recordingLabel.text = "Recording"
             resumeButton.enabled = false
             pauseButton.enabled = true
         case .Paused:
+            showAndHideRecordingInterface(false)
             resumeButton.enabled = true
             pauseButton.enabled = false
             recordingLabel.text = "Recording paused"
@@ -116,7 +106,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         } else {
             if doDebug { print("Recording was not successful!") }
-            waitingTapToRecord()
+            recordingInterface(.Waiting)
         }
     }
     

@@ -19,6 +19,11 @@ class PlaySoundsViewController: UIViewController {
     var audioEngine: AVAudioEngine!
     var audioFile: AVAudioFile!
     
+    enum EffectMode {
+        case Pitch
+        case Reverb
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -34,75 +39,58 @@ class PlaySoundsViewController: UIViewController {
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillDisappear(animated: Bool) {
+        resetPlayer()
     }
- 
+    
+    func resetPlayer() {
+        myAudioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
+    }
+    
     func playAudioRate(theRate: Float) {
         if theRate >= 0.5 && theRate <= 2.0 {
-            myAudioPlayer.stop()
-            audioEngine.stop()
-            audioEngine.reset()
+            resetPlayer()
             
             myAudioPlayer.rate = theRate
             myAudioPlayer.currentTime = 0.0
             myAudioPlayer.play()
         }
     }
-    
-    func playAudioPitch(thePitch: Float) {
-        if thePitch >= -2400 && thePitch <= 2400 {
-            
-            if doDebug { print("In PlayAudioPitch with parameter \(thePitch).") }
-            // Stop and reset everything
-            myAudioPlayer.stop()
-            audioEngine.stop()
-            audioEngine.reset()
-            
-            // Create player nodes
-            let pitchPlayer = AVAudioPlayerNode()
-            audioEngine.attachNode(pitchPlayer)
-
-            // create pitch effect node
-            let timePitch = AVAudioUnitTimePitch()
-            timePitch.pitch = thePitch
-            audioEngine.attachNode(timePitch)
-            
-            audioEngine.connect(pitchPlayer, to: timePitch, format: nil)
-            audioEngine.connect(timePitch, to: audioEngine.outputNode, format: nil)
-            
-            pitchPlayer.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-            try! audioEngine.start()
-            
-            pitchPlayer.play()
-
-            
-        } else {
-            print("ERR: input value for pitch [\(thePitch)] is out of bounds (-2400..+2400)")
-        }
-    }
    
-    func playWithEffect() {
+    func playWithEffect(mode: EffectMode, effectParameter: Float) {
  
         // Stop and reset everything
-        myAudioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        resetPlayer()
         
         // Create player nodes
         let audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
         
-        // create reverb effect node
-        // I searched the documentation and exemples on the internet
-        let effect = AVAudioUnitReverb()
-        effect.loadFactoryPreset(.Cathedral)
-        effect.wetDryMix = 50.0
-        audioEngine.attachNode(effect)
-        let inputFormat = effect.inputFormatForBus(0)
-        audioEngine.connect(audioPlayerNode, to: effect, format: inputFormat)
-        audioEngine.connect(effect, to: audioEngine.outputNode, format: inputFormat)
+        // create effect node
+        // I searched the documentation and examples on the internet for the reverb effect
+        // I cannot put the audioEngine.attachNode(effect) line and those following
+        // outside the switch statement because they're of different types depending on
+        // the mode: effect for Pitch is of type AVAudioUnitTimeEffect while
+        // effect for Reverb is of type AVAudioUnitEffect
+        switch mode {
+        case .Pitch:
+            let effect = AVAudioUnitTimePitch()
+            effect.pitch = effectParameter
+            audioEngine.attachNode(effect)
+            let inputFormat = effect.inputFormatForBus(0)
+            audioEngine.connect(audioPlayerNode, to: effect, format: inputFormat)
+            audioEngine.connect(effect, to: audioEngine.outputNode, format: inputFormat)
+       case .Reverb:
+            let effect = AVAudioUnitReverb()
+            effect.loadFactoryPreset(.Cathedral)
+            effect.wetDryMix = 50.0
+            audioEngine.attachNode(effect)
+            let inputFormat = effect.inputFormatForBus(0)
+            audioEngine.connect(audioPlayerNode, to: effect, format: inputFormat)
+            audioEngine.connect(effect, to: audioEngine.outputNode, format: inputFormat)
+        }
         
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
         try! audioEngine.start()
@@ -124,7 +112,7 @@ class PlaySoundsViewController: UIViewController {
     @IBAction func playChipmunk(sender: UIButton) {
         if noError {
             if doDebug { print("playing chipmunk...") }
-            playAudioPitch(1000)
+            playWithEffect(.Pitch, effectParameter: 1000)
         } else {
             print("ERR: trying to play a file sound while failed to load.")
         }
@@ -133,7 +121,7 @@ class PlaySoundsViewController: UIViewController {
     @IBAction func playDarkVader(sender: UIButton) {
         if noError {
             if doDebug { print("playing darkvader...") }
-            playAudioPitch(-600)
+            playWithEffect(.Pitch, effectParameter: -600)
         } else {
             print("ERR: trying to play a file sound while failed to load.")
         }
@@ -143,7 +131,7 @@ class PlaySoundsViewController: UIViewController {
     @IBAction func playReverb(sender: UIButton) {
         if noError {
             if doDebug { print("playing reverb...") }
-            playWithEffect()
+            playWithEffect(.Reverb, effectParameter: 0)
         } else {
             print("ERR: trying to play a file sound while failed to load.")
         }
@@ -161,20 +149,7 @@ class PlaySoundsViewController: UIViewController {
     }
     
     @IBAction func stopPlayback(sender: UIButton) {
-        myAudioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        resetPlayer()
         if doDebug { print("Playback stopped") }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

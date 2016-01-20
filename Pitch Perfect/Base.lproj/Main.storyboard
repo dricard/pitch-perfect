@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e9o-HG-c4J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e9o-HG-c4J">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -20,6 +20,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPu-NM-4wY">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
                                 <state key="normal" image="microphone"/>
                                 <connections>
                                     <action selector="recordAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Lq-kt-zdJ"/>
@@ -27,12 +28,14 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording in progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGy-dC-yPI">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.14509803921568626" green="0.28235294117647058" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXX-W1-CDe">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
                                 <state key="normal" image="resume"/>
                                 <connections>
                                     <action selector="resumeRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yCo-kg-wGl"/>
@@ -40,6 +43,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ff-Xo-kiQ">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
                                 <state key="normal" image="pause"/>
                                 <connections>
                                     <action selector="pauseRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CiI-ck-Ad1"/>
@@ -47,6 +51,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSi-ST-OFX">
                                 <rect key="frame" x="20" y="20" width="50" height="50"/>
+                                <animations/>
                                 <state key="normal" image="stop">
                                     <color key="titleShadowColor" red="0.1042444929" green="0.36417457460000002" blue="0.5207685232" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -56,32 +61,27 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pause" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyb-gN-cVS">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.1450980392" green="0.28235294119999998" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="161" y="557" width="79" height="23"/>
-                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BzU-ZK-g7t">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.1450980392" green="0.28235294119999998" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="266" y="557" width="68" height="23"/>
-                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resume" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SW4-TB-pih">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.1450980392" green="0.28235294119999998" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="65" y="557" width="70" height="23"/>
-                                </variation>
                             </label>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SW4-TB-pih" firstAttribute="top" secondItem="rXX-W1-CDe" secondAttribute="bottom" constant="9" id="7lb-RI-Zf2"/>
@@ -113,22 +113,22 @@
                                 <exclude reference="SW4-TB-pih"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="mjQ-Dg-hMi"/>
-                                <exclude reference="rxy-yA-7vp"/>
-                                <exclude reference="hWZ-VU-zEx"/>
-                                <exclude reference="zeC-Ex-k5a"/>
-                                <exclude reference="94P-cn-XRi"/>
-                                <exclude reference="AEj-AU-eK8"/>
-                                <exclude reference="hap-2a-OtO"/>
-                                <exclude reference="7lb-RI-Zf2"/>
-                                <exclude reference="pgc-kq-Pgr"/>
-                                <exclude reference="J34-MI-Aiv"/>
-                                <exclude reference="MN6-7K-B9N"/>
-                                <exclude reference="XLw-7J-Xn5"/>
-                                <exclude reference="zax-xb-hVx"/>
                                 <exclude reference="H6t-M8-SEI"/>
                                 <exclude reference="Tv5-tc-UFb"/>
                                 <exclude reference="zbm-Ha-rLG"/>
+                                <exclude reference="94P-cn-XRi"/>
+                                <exclude reference="AEj-AU-eK8"/>
+                                <exclude reference="mjQ-Dg-hMi"/>
+                                <exclude reference="rxy-yA-7vp"/>
+                                <exclude reference="XLw-7J-Xn5"/>
+                                <exclude reference="zax-xb-hVx"/>
+                                <exclude reference="7lb-RI-Zf2"/>
+                                <exclude reference="pgc-kq-Pgr"/>
+                                <exclude reference="hWZ-VU-zEx"/>
+                                <exclude reference="zeC-Ex-k5a"/>
+                                <exclude reference="J34-MI-Aiv"/>
+                                <exclude reference="MN6-7K-B9N"/>
+                                <exclude reference="hap-2a-OtO"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -143,22 +143,22 @@
                                 <include reference="SW4-TB-pih"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="mjQ-Dg-hMi"/>
-                                <include reference="rxy-yA-7vp"/>
-                                <include reference="hWZ-VU-zEx"/>
-                                <include reference="zeC-Ex-k5a"/>
-                                <include reference="94P-cn-XRi"/>
-                                <include reference="AEj-AU-eK8"/>
-                                <include reference="hap-2a-OtO"/>
-                                <include reference="7lb-RI-Zf2"/>
-                                <include reference="pgc-kq-Pgr"/>
-                                <include reference="J34-MI-Aiv"/>
-                                <include reference="MN6-7K-B9N"/>
-                                <include reference="XLw-7J-Xn5"/>
-                                <include reference="zax-xb-hVx"/>
                                 <include reference="H6t-M8-SEI"/>
                                 <include reference="Tv5-tc-UFb"/>
                                 <include reference="zbm-Ha-rLG"/>
+                                <include reference="94P-cn-XRi"/>
+                                <include reference="AEj-AU-eK8"/>
+                                <include reference="mjQ-Dg-hMi"/>
+                                <include reference="rxy-yA-7vp"/>
+                                <include reference="XLw-7J-Xn5"/>
+                                <include reference="zax-xb-hVx"/>
+                                <include reference="7lb-RI-Zf2"/>
+                                <include reference="pgc-kq-Pgr"/>
+                                <include reference="hWZ-VU-zEx"/>
+                                <include reference="zeC-Ex-k5a"/>
+                                <include reference="J34-MI-Aiv"/>
+                                <include reference="MN6-7K-B9N"/>
+                                <include reference="hap-2a-OtO"/>
                             </mask>
                         </variation>
                     </view>
@@ -193,6 +193,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODY-QT-WAV">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="PEX-MZ-Jcj"/>
                                     <constraint firstAttribute="height" constant="100" id="kee-a4-G4f"/>
@@ -216,6 +217,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0U-WN-PuF">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="9cJ-6u-3Es"/>
                                     <constraint firstAttribute="width" constant="100" id="IiL-8O-Vm8"/>
@@ -239,16 +241,15 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGQ-ir-2Pe">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
                                 <state key="normal" image="stop"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="160" y="470" width="80" height="80"/>
-                                </variation>
                                 <connections>
                                     <action selector="stopPlayback:" destination="TML-gX-dRl" eventType="touchUpInside" id="Dve-Yj-lZh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycB-dl-zKT">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
                                 <state key="normal" image="chipmunk"/>
                                 <connections>
                                     <action selector="playChipmunk:" destination="TML-gX-dRl" eventType="touchUpInside" id="7K9-Cm-Ge4"/>
@@ -256,6 +257,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="833-yD-vGf">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
                                 <state key="normal" image="darthvader"/>
                                 <connections>
                                     <action selector="playDarkVader:" destination="TML-gX-dRl" eventType="touchUpInside" id="8NW-nZ-cst"/>
@@ -263,6 +265,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMj-eF-nAb">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
                                 <state key="normal" image="reverb"/>
                                 <connections>
                                     <action selector="playReverb:" destination="TML-gX-dRl" eventType="touchUpInside" id="nZ3-3Y-wj3"/>
@@ -270,14 +273,13 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop Playback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AB-hZ-TKZ">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.1450980392" green="0.28235294119999998" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="146" y="565" width="109" height="21"/>
-                                </variation>
                             </label>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="1AB-hZ-TKZ" firstAttribute="top" secondItem="qGQ-ir-2Pe" secondAttribute="bottom" constant="15" id="60f-wc-4ek"/>
@@ -306,20 +308,20 @@
                                 <exclude reference="1AB-hZ-TKZ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="7jE-fj-gXc"/>
-                                <exclude reference="uZS-iH-tJL"/>
-                                <exclude reference="ZFQ-2h-bkx"/>
-                                <exclude reference="sQN-bh-IP0"/>
-                                <exclude reference="DRf-tk-nVs"/>
-                                <exclude reference="hb7-I7-L76"/>
-                                <exclude reference="PPx-mC-fES"/>
-                                <exclude reference="UTq-qn-BnV"/>
+                                <exclude reference="w0x-wc-fu8"/>
                                 <exclude reference="AGZ-WL-De6"/>
                                 <exclude reference="Fvx-pj-ypa"/>
+                                <exclude reference="ZFQ-2h-bkx"/>
+                                <exclude reference="sQN-bh-IP0"/>
+                                <exclude reference="7jE-fj-gXc"/>
+                                <exclude reference="uZS-iH-tJL"/>
                                 <exclude reference="xGZ-N9-XTL"/>
+                                <exclude reference="PPx-mC-fES"/>
+                                <exclude reference="UTq-qn-BnV"/>
+                                <exclude reference="DRf-tk-nVs"/>
+                                <exclude reference="hb7-I7-L76"/>
                                 <exclude reference="60f-wc-4ek"/>
                                 <exclude reference="Zww-J2-6aa"/>
-                                <exclude reference="w0x-wc-fu8"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -333,20 +335,20 @@
                                 <include reference="1AB-hZ-TKZ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="7jE-fj-gXc"/>
-                                <include reference="uZS-iH-tJL"/>
-                                <include reference="ZFQ-2h-bkx"/>
-                                <include reference="sQN-bh-IP0"/>
-                                <include reference="DRf-tk-nVs"/>
-                                <include reference="hb7-I7-L76"/>
-                                <include reference="PPx-mC-fES"/>
-                                <include reference="UTq-qn-BnV"/>
+                                <include reference="w0x-wc-fu8"/>
                                 <include reference="AGZ-WL-De6"/>
                                 <include reference="Fvx-pj-ypa"/>
+                                <include reference="ZFQ-2h-bkx"/>
+                                <include reference="sQN-bh-IP0"/>
+                                <include reference="7jE-fj-gXc"/>
+                                <include reference="uZS-iH-tJL"/>
                                 <include reference="xGZ-N9-XTL"/>
+                                <include reference="PPx-mC-fES"/>
+                                <include reference="UTq-qn-BnV"/>
+                                <include reference="DRf-tk-nVs"/>
+                                <include reference="hb7-I7-L76"/>
                                 <include reference="60f-wc-4ek"/>
                                 <include reference="Zww-J2-6aa"/>
-                                <include reference="w0x-wc-fu8"/>
                             </mask>
                         </variation>
                     </view>
@@ -363,6 +365,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="48u-Cg-bgl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

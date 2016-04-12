@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "filename" : "microphone~iphone.png",
+      "filename" : "microphone.png",
       "scale" : "1x"
     },
     {
       "idiom" : "iphone",
-      "filename" : "microphone@2x~iphone.png",
+      "filename" : "microphone@2x.png",
       "scale" : "2x"
     },
     {

@@ -11,6 +11,8 @@ import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
 
+    // MARK: Properties
+    
     let doDebug = false
     
     var myAudioPlayer : AVAudioPlayer!
@@ -23,6 +25,8 @@ class PlaySoundsViewController: UIViewController {
         case Pitch
         case Reverb
     }
+    
+    // MARK: Lyfe Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,61 +47,7 @@ class PlaySoundsViewController: UIViewController {
         resetPlayer()
     }
     
-    func resetPlayer() {
-        myAudioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
-    }
-    
-    func playAudioRate(theRate: Float) {
-        if theRate >= 0.5 && theRate <= 2.0 {
-            resetPlayer()
-            
-            myAudioPlayer.rate = theRate
-            myAudioPlayer.currentTime = 0.0
-            myAudioPlayer.play()
-        }
-    }
-   
-    func playWithEffect(mode: EffectMode, effectParameter: Float) {
- 
-        // Stop and reset everything
-        resetPlayer()
-        
-        // Create player nodes
-        let audioPlayerNode = AVAudioPlayerNode()
-        audioEngine.attachNode(audioPlayerNode)
-        
-        // create effect node
-        // I searched the documentation and examples on the internet for the reverb effect
-        // I cannot put the audioEngine.attachNode(effect) line and those following
-        // outside the switch statement because they're of different types depending on
-        // the mode: effect for Pitch is of type AVAudioUnitTimeEffect while
-        // effect for Reverb is of type AVAudioUnitEffect
-        switch mode {
-        case .Pitch:
-            let effect = AVAudioUnitTimePitch()
-            effect.pitch = effectParameter
-            audioEngine.attachNode(effect)
-            let inputFormat = effect.inputFormatForBus(0)
-            audioEngine.connect(audioPlayerNode, to: effect, format: inputFormat)
-            audioEngine.connect(effect, to: audioEngine.outputNode, format: inputFormat)
-       case .Reverb:
-            let effect = AVAudioUnitReverb()
-            effect.loadFactoryPreset(.Cathedral)
-            effect.wetDryMix = 50.0
-            audioEngine.attachNode(effect)
-            let inputFormat = effect.inputFormatForBus(0)
-            audioEngine.connect(audioPlayerNode, to: effect, format: inputFormat)
-            audioEngine.connect(effect, to: audioEngine.outputNode, format: inputFormat)
-        }
-        
-        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-        try! audioEngine.start()
-        
-        audioPlayerNode.play()
-    }
-
+    // MARK: User actions
 
     @IBAction func playSlow(sender: UIButton) {
         if noError {
@@ -152,4 +102,61 @@ class PlaySoundsViewController: UIViewController {
         resetPlayer()
         if doDebug { print("Playback stopped") }
     }
+    
+    // MARK: Utilities methods
+    
+    func resetPlayer() {
+        myAudioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
+    }
+    
+    func playAudioRate(theRate: Float) {
+        if theRate >= 0.5 && theRate <= 2.0 {
+            resetPlayer()
+            
+            myAudioPlayer.rate = theRate
+            myAudioPlayer.currentTime = 0.0
+            myAudioPlayer.play()
+        }
+    }
+    
+    func playWithEffect(mode: EffectMode, effectParameter: Float) {
+        
+        // Stop and reset everything
+        resetPlayer()
+        
+        // Create player nodes
+        let audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        // create effect node
+        // I cannot put the audioEngine.attachNode(effect) line and those following
+        // outside the switch statement because they're of different types depending on
+        // the mode: effect for Pitch is of type AVAudioUnitTimeEffect while
+        // effect for Reverb is of type AVAudioUnitEffect
+        switch mode {
+        case .Pitch:
+            let effect = AVAudioUnitTimePitch()
+            effect.pitch = effectParameter
+            audioEngine.attachNode(effect)
+            let inputFormat = effect.inputFormatForBus(0)
+            audioEngine.connect(audioPlayerNode, to: effect, format: inputFormat)
+            audioEngine.connect(effect, to: audioEngine.outputNode, format: inputFormat)
+        case .Reverb:
+            let effect = AVAudioUnitReverb()
+            effect.loadFactoryPreset(.Cathedral)
+            effect.wetDryMix = 50.0
+            audioEngine.attachNode(effect)
+            let inputFormat = effect.inputFormatForBus(0)
+            audioEngine.connect(audioPlayerNode, to: effect, format: inputFormat)
+            audioEngine.connect(effect, to: audioEngine.outputNode, format: inputFormat)
+        }
+        
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        try! audioEngine.start()
+        
+        audioPlayerNode.play()
+    }
+
 }

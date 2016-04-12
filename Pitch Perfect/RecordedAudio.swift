@@ -8,6 +8,8 @@
 
 import Foundation
 
+// This is the Model class for this project. filePathUrl holds the path
+// to the audio file
 class RecordedAudio: NSObject{
     var filePathUrl: NSURL!
     var title: String!

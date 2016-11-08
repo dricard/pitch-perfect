@@ -15,7 +15,7 @@ It showcases how to use the AVFondation: AVAudioEngine, AVAudioPlayer, AVAudioFi
 
 #### Documentation
 
-The code is well documented. More information can be found on the [project's page](http://hexaedre.com/projects/pitch-perfect/).
+The code is well documented. More information can be found on the [project's page](http://hexaedre.com/apps/pitch-perfect/).
 
 #### Install
 
@@ -29,7 +29,7 @@ This project is for **Swift version 2.2** and **Xcode version 7.3**.
 
 #### More information
 
-More information and screenshots can be found on the [project's page](http://hexaedre.com/projects/pitch-perfect/). If you have questions I'd be happy to help. Contact information can be found below or on the project's page.
+More information and screenshots can be found on the [project's page](http://hexaedre.com/apps/pitch-perfect/). If you have questions I'd be happy to help. Contact information can be found below or on the project's page.
 
 #### How to contribute
 
